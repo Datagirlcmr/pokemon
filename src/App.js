@@ -58,7 +58,7 @@ class App extends Component {
             <Route path="/contact" Component={Contact} />
           </Routes> */}
 
-        <Form.Control
+        <Form.Control style={{width:'50%', marginLeft: "50%", textAlign: "center"}}
           size="lg"
           type="text"
           placeholder="Search Pokemon"
