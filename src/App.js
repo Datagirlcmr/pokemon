@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Pokemon from "./pokemon";
+import Form from "react-bootstrap/Form";
 // import Home from "./components/Home";
 // import Contact from "./components/Contact";
 // import About from "./components/About";
@@ -10,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class App extends Component {
   state = {
     data: [],
+    searchTerm: "",
   };
   componentDidMount() {
     this.fetchData();
@@ -23,7 +25,6 @@ class App extends Component {
         let data = await response.json();
         results.push(data);
       }
-      console.log(results);
       this.setState({
         data: results,
       });
@@ -32,18 +33,41 @@ class App extends Component {
     }
   }
 
+  handleSearch = (e) => {
+    const { value } = e.target;
+    const filteredList = this.state.data.filter((pokemon) => {
+      return pokemon.name.toLowerCase().includes(value.toLowerCase());
+    });
+
+    this.setState({
+      data: filteredList,
+      searchTerm: value,
+    });
+  };
+
+  
+
   render() {
     return (
       // <BrowserRouter>
-        <div>
-          {/* <Navbar />
+      <div>
+        {/* <Navbar />
           <Routes>
             <Route path="/" Component={Home} />
             <Route path="/about" Component={About} />
             <Route path="/contact" Component={Contact} />
           </Routes> */}
-          <Pokemon pokemon={this.state.data} />
-        </div>
+
+        <Form.Control
+          size="lg"
+          type="text"
+          placeholder="Search Pokemon"
+          onChange={this.handleSearch}
+          value={this.searchTerm}
+        />
+
+        <Pokemon pokemon={this.state.data} />
+      </div>
       // </BrowserRouter>
     );
   }
