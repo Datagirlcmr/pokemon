@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Pokemon from "./pokemon";
 import Form from "react-bootstrap/Form";
-// import Home from "./components/Home";
+import NavBarBootstrap from "./components/Navbar";
+import Home from "./components/Home";
 // import Contact from "./components/Contact";
 // import About from "./components/About";
-// import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 // import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -49,26 +50,28 @@ class App extends Component {
 
   render() {
     return (
-      // <BrowserRouter>
+      <BrowserRouter>
       <div>
-        {/* <Navbar />
+        <div style={{display:"flex", justifyContent: 'space-evenly'}}>
+        <NavBarBootstrap />
           <Routes>
-            <Route path="/" Component={Home} />
-            <Route path="/about" Component={About} />
-            <Route path="/contact" Component={Contact} />
-          </Routes> */}
+            {/* <Route exact path="/" Component={Home} /> */}
+            {/* <Route path="/about" Component={About} />
+            <Route path="/contact" Component={Contact} /> */}
+          </Routes> 
 
-        <Form.Control style={{width:'50%', marginLeft: "50%", textAlign: "center"}}
+        <Form.Control style={{ textAlign: "center", width:'50%'}}
           size="lg"
           type="text"
           placeholder="Search Pokemon"
           onChange={this.handleSearch}
           value={this.searchTerm}
         />
+        </div>
 
         <Pokemon pokemon={this.state.data} />
       </div>
-      // </BrowserRouter>
+    </BrowserRouter>
     );
   }
 }
